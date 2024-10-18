@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
+import {  createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
     const [isSignIn , setIsSignIn] = useState(true);
@@ -17,6 +19,42 @@ const Login = () => {
         const message = checkValidData(email.current.value,password.current.value);
         console.log(message);
         setCredError(message);
+        if(message) return;
+
+        if(!isSignIn){
+            //signup logic
+            createUserWithEmailAndPassword(auth, email.current.value,password.current.value)
+            .then((userCredential) => {
+              // Signed up 
+              const user = userCredential.user;
+              console.log(user);
+              
+              // ...
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              console.log((errorCode + '::' + errorMessage));
+              setCredError(errorMessage)
+              // ..
+            });;
+        } else{
+            //signin logic
+            signInWithEmailAndPassword(auth, email.current.value,password.current.value)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                console.log(user);
+                
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode+ '::' + errorMessage);
+                setCredError(errorCode)
+            });
+        }
         
     }
     const toggleSignIn = () => {
@@ -35,7 +73,7 @@ const Login = () => {
         {!isSignIn && <input className="p-4 m-2 w-full bg-slate-50 bg-opacity-20 text-white rounded-md" type="text" placeholder="Enter full name" />}
         <input ref={email} className="p-4 m-2 w-full bg-slate-50 bg-opacity-20 text-white rounded-md" type="text" placeholder="Email or mobile number" />
         <input ref={password} className="p-4 m-2 w-full bg-slate-50 bg-opacity-20 text-white rounded-md" type="password" placeholder="Password" />
-        {credError && <p className="p-2 m-2 text-red-600">Enter valid email and password.</p>}
+        {credError && <p className="p-2 m-2 text-red-600">{credError}</p>}
         <button className="p-2 m-2 mt-6 text-white bg-red-600 w-full rounded-md" onClick={handleButtonClick}>{isSignIn ? 'Sign In': 'Sign Up'}</button>
         {isSignIn ? (<div className="mt-6 ml-2">
         <span className="text-gray-50">New to Netflix ?  </span>
