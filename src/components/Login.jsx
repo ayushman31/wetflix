@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
-import {  createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {  createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
 
 const Login = () => {
@@ -10,6 +10,7 @@ const Login = () => {
 
     const email = useRef(null);
     const password = useRef(null);
+    const name = useRef(null);
 
     const handleButtonClick =  () => {
         //validate the form data
@@ -27,6 +28,16 @@ const Login = () => {
             .then((userCredential) => {
               // Signed up 
               const user = userCredential.user;
+
+              updateProfile(auth.currentUser, {
+                displayName: name.current.value, photoURL: "https://avatars.githubusercontent.com/u/126311398?v=4"
+              }).then(() => {
+                // Profile updated!
+                // ...
+              }).catch((error) => {
+                // An error occurred
+                // ...
+              });
               console.log(user);
               
               // ...
@@ -70,7 +81,7 @@ const Login = () => {
       <form onSubmit={(e) => e.preventDefault()} className="absolute w-3/12 p-12 bg-black bg-opacity-70 m-auto right-0 left-0 top-0 my-40">
       <h1 className="font-semibold text-white text-4xl ml-2 mb-8">{isSignIn ? 'Sign In': 'Sign Up'}</h1>
 
-        {!isSignIn && <input className="p-4 m-2 w-full bg-slate-50 bg-opacity-20 text-white rounded-md" type="text" placeholder="Enter full name" />}
+        {!isSignIn && <input ref={name} className="p-4 m-2 w-full bg-slate-50 bg-opacity-20 text-white rounded-md" type="text" placeholder="Enter full name" />}
         <input ref={email} className="p-4 m-2 w-full bg-slate-50 bg-opacity-20 text-white rounded-md" type="text" placeholder="Email or mobile number" />
         <input ref={password} className="p-4 m-2 w-full bg-slate-50 bg-opacity-20 text-white rounded-md" type="password" placeholder="Password" />
         {credError && <p className="p-2 m-2 text-red-600">{credError}</p>}
