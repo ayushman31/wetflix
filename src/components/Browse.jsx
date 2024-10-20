@@ -1,5 +1,7 @@
 import React, {useEffect} from 'react';
 import useNowPlayingMovies from '../hooks/useNowPlayingMovies';
+import MainContainer from './MainContainer';
+import SecondaryContainer from './SecondaryContainer';
 
 
 const Browse = () => {
@@ -8,7 +10,10 @@ const Browse = () => {
 
 
   return (
-    <div></div>
+    <div>
+      <MainContainer />
+      <SecondaryContainer />
+    </div>
   )
 }
 
