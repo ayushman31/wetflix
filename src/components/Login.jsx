@@ -3,6 +3,7 @@ import Header from "./Header";
 import { checkValidData } from "../utils/validate";
 import {  createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { LANDING_BG } from "../utils/constants";
 
 const Login = () => {
     const [isSignIn , setIsSignIn] = useState(true);
@@ -75,7 +76,7 @@ const Login = () => {
     <div >
       <Header />
       <div >
-        <img className="absolute brightness-50  w-full " src="https://assets.nflxext.com/ffe/siteui/vlv3/7c0e18aa-2c95-474d-802e-7f30e75dcca4/web/IN-en-20241014-TRIFECTA-perspective_e7121311-c11e-4809-a3e6-22abffa33569_large.jpg"
+        <img className="absolute brightness-50  w-full " src={LANDING_BG}
         alt="backgroud-image" />
       </div>
       <form onSubmit={(e) => e.preventDefault()} className="absolute w-3/12 p-12 bg-black bg-opacity-70 m-auto right-0 left-0 top-0 my-40">

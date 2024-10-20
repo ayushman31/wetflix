@@ -22,6 +22,7 @@ const Body = () => {
             } else {
               // User is signed out
               dispatch(removeUser())
+              navigate('/')
               
               // ...
             }
