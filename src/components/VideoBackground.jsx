@@ -1,35 +1,29 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { API_OPTIONS } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addTrailerVideo } from "../utils/movieSlice";
+import useTrailer from "../hooks/useTrailer";
 
 const VideoBackground = ({ movieId }) => {
-  const dispatch = useDispatch();
-  const trailer = useSelector((store) => store.movies.trailerVideo);
+    const trailer = useSelector((store) => store.movies.trailerVideo);
+    useTrailer(movieId)
 
-  const getMoviesData = async () => {
-    const data = await fetch(
-      "https://api.themoviedb.org/3/movie/1184918/videos?language=en-US",
-      API_OPTIONS
-    );
-    const json = await data.json();
 
-    const trailers = json.results.filter((item) => item.type == "Trailer");
-    dispatch(addTrailerVideo(trailers[0]));
-  };
-  useEffect(() => {
-    getMoviesData();
-  }, []);
   return (
     <div>
-      <iframe
-        width="560"
-        height="315"
-        src={"https://www.youtube.com/embed/"+trailer.key}
-       // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-      ></iframe>
-    </div>
+  {trailer ? (
+    <iframe
+      className="w-full aspect-video object-cover brightness-50"
+      src={`https://www.youtube.com/embed/${trailer.key}?autoplay=1&mute=1&frameborder=0&controls=0&showinfo=0&loop=1&playlist=${trailer.key}`}
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      referrerPolicy="strict-origin-when-cross-origin"
+      frameBorder="0"
+    ></iframe>
+  ) : (
+    <p>Loading...</p>
+  )}
+</div>
+
   );
 };
 
