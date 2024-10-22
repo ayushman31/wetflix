@@ -13,7 +13,7 @@ const VideoBackground = ({ movieId }) => {
     <div>
   {trailer ? (
     <iframe
-      className="w-full aspect-video object-cover brightness-50"
+      className="w-full aspect-video object-cover -mt-28 "
       src={`https://www.youtube.com/embed/${trailer.key}?autoplay=1&mute=1&frameborder=0&controls=0&showinfo=0&loop=1&playlist=${trailer.key}`}
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       referrerPolicy="strict-origin-when-cross-origin"
