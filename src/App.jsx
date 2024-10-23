@@ -1,4 +1,4 @@
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import "./App.css";
 import Body from "./components/Body";
 import appStore from "./utils/appStore";
@@ -18,7 +18,7 @@ function App() {
         },
         {
           path: "browse",
-          element: <Browse />,
+          element:<Browse />,
         },
       ],
     },

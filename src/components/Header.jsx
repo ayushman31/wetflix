@@ -21,7 +21,7 @@ const Header = () => {
   };
 
   return (
-    <div className={"z-40 flex absolute justify-between text-red-600 w-full bg-gradient-to-b from-black" + (user?"mt-28":"")}>
+    <div className={"z-40 flex absolute justify-between text-red-600 w-full bg-gradient-to-b from-black" + (user?"mt-40":"")}>
       <img
         className="  w-44 p-2  m-32 h-44 -mt-8 "
         src="/netflix.png"
