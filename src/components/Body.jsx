@@ -5,6 +5,7 @@ import { auth } from '../utils/firebase'
 import { useDispatch } from 'react-redux'
 import { addUser, removeUser } from '../utils/userSlice'
 import Header from './Header'
+import { closeOptionBar } from '../utils/optionSlice'
 
 const Body = () => {
     const dispatch = useDispatch();
@@ -18,11 +19,13 @@ const Body = () => {
               const {uid, displayName , email , photoURL} = user;
                dispatch(addUser({uid , displayName , email , photoURL}));
                navigate('/browse')
+               dispatch(closeOptionBar())
               // ...
             } else {
               // User is signed out
               dispatch(removeUser())
               navigate('/')
+              dispatch(closeOptionBar())
               
               // ...
             }
