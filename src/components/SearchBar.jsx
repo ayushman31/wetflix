@@ -7,10 +7,10 @@ const SearchBar = () => {
       <form className="bg-black w-1/2 grid grid-cols-12 ">
         <input
           type="text"
-          placeholder={language.ar.searchPlaceholder}
+          placeholder={language.hi.searchPlaceholder}
           className="col-span-9 p-4 m-4"
         />
-        <button className="col-span-3 bg-red-600 text-white px-4 py-2 m-4 rounded-lg">{language.ar.search}</button>
+        <button className="col-span-3 bg-red-600 text-white px-4 py-2 m-4 rounded-lg">{language.hi.search}</button>
       </form>
     </div>
   );
