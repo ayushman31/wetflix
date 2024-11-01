@@ -4,11 +4,13 @@ import { toggleOptionBar } from "../utils/optionSlice";
 import OptionsBar from "./OptionsBar";
 import { toggleSearch } from "../utils/searchSlice";
 import language from "../utils/languageConstants";
+import { changeLanguage } from "../utils/languageSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user);
+  const lang = useSelector(store => store.language.showLanguage)
 
   const toggleOptions = () => {
     dispatch(toggleOptionBar());
@@ -17,6 +19,10 @@ const Header = () => {
   const toggleSearchHandler = () => {
     dispatch(toggleSearch());
   };
+
+  const toggleLanguage = (e) => {
+    dispatch(changeLanguage(e.target.value))
+  }
 
   return (
     <div
@@ -32,7 +38,7 @@ const Header = () => {
           
 
           <div className="flex items-center p-2 h-16 m-6 mb-0 rounded-md cursor-pointer">
-          <select className="h-4/5 bg-transparent text-white m-2 border-none rounded-lg">
+          <select className="h-4/5 bg-transparent text-white m-2 border-none rounded-lg" onChange={toggleLanguage}>
             {Object.keys(language).map((key) => (
               <option
                 key={language[key].identifier}
@@ -46,8 +52,9 @@ const Header = () => {
             <button
               className="text-lg font-medium bg-red-700 text-white p-2 hover:bg-red-600 rounded-lg"
               onClick={toggleSearchHandler}
+              
             >
-              Search
+              {language[lang].search}
             </button>
             <div onClick={toggleOptions}>
               <img
@@ -57,7 +64,7 @@ const Header = () => {
               />
             </div>
             <button className="text-lg font-medium  p-2 rounded-lg text-white ">
-              Welcome, {user?.displayName?.split(" ")[0]}
+              {language[lang].welcome}, {user?.displayName?.split(" ")[0]}
             </button>
           </div>
           <div className="flex justify-center mt-0 w-full ">

@@ -3,13 +3,15 @@ import userSlice from "./userSlice";
 import movieSlice from "./movieSlice";
 import optionSlice from "./optionSlice";
 import searchSlice from "./searchSlice";
+import languageSlice from "./languageSlice";
 
 const appStore = configureStore({
     reducer: {
         user: userSlice,
         movies: movieSlice,
         options: optionSlice,
-        search: searchSlice
+        search: searchSlice,
+        language: languageSlice,
     }
 })
 
