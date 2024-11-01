@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleOptionBar } from "../utils/optionSlice";
 import OptionsBar from "./OptionsBar";
+import {toggleSearch} from "../utils/searchSlice"
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,9 @@ const Header = () => {
     dispatch(toggleOptionBar());
   };
 
+  const toggleSearchHandler = () => {
+    dispatch(toggleSearch())
+  }
  
 
   return (
@@ -25,7 +29,7 @@ const Header = () => {
         <div className="">
           
         <div className="flex  items-center p-2 h-16 m-6 mb-0 rounded-md cursor-pointer" >
-        <button className="text-lg font-medium bg-red-700 text-white p-2 hover:bg-red-600 rounded-lg">Search</button>
+        <button className="text-lg font-medium bg-red-700 text-white p-2 hover:bg-red-600 rounded-lg" onClick={toggleSearchHandler}>Search</button>
           <div onClick={toggleOptions}>
             
             <img src={user.photoURL} className="h-12 w-12 rounded-full mx-4" alt="User" />
