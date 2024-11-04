@@ -7,12 +7,9 @@ import { removeSearch } from "../utils/searchSlice";
 
 const Search = () => {
     const search = useSelector(store => store.search.showSearch)
-    const dispatch = useDispatch()
-    const removeBlur = () => {
-        dispatch(removeSearch())
-    }
+    
   return (
-    <div className="z-40 absolute w-full" onBlur={removeBlur}>
+    <div className="z-40 absolute w-full" >
       <SearchBar />
       <MovieSuggestions /> 
     </div>

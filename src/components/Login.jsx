@@ -76,7 +76,7 @@ const Login = () => {
     <div >
       <Header />
       <div >
-        <img className="absolute brightness-50  w-full " src={LANDING_BG}
+        <img className="absolute brightness-50  w-full h-full object-cover " src={LANDING_BG}
         alt="backgroud-image" />
       </div>
       <form onSubmit={(e) => e.preventDefault()} className="absolute w-3/12 p-12 bg-black bg-opacity-70 m-auto right-0 left-0 top-0 my-40">
